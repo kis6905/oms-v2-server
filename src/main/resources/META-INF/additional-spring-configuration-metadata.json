@@ -1,0 +1,10 @@
+{
+	"properties": [
+		{
+			"name": "jwt.enable",
+			"type": "java.lang.String",
+			"description": "enable jwt authrization.",
+      		"defaultValue": "true"
+		}
+	]
+}
