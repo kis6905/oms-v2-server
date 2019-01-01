@@ -79,7 +79,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(TOKEN_ENTRY_POINT).permitAll()
 				.antMatchers(LOGIN_ENTRY_POINT).permitAll()
 				.antMatchers(ERROR_ENTRY_POINT).permitAll()
-				.antMatchers(ROOT_ENTRY_POINT)
+				.antMatchers(ROOT_ENTRY_POINT).hasAnyRole("ROLE_USER", "ROLE_ADMIN")
+				.anyRequest()
 				.authenticated();
     }
 	
@@ -89,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setExposedHeaders(Arrays.asList(JwtInfo.HEADER_NAME, "test"));
+        configuration.setExposedHeaders(Arrays.asList(JwtInfo.HEADER_NAME));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
