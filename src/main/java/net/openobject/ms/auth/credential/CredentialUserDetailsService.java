@@ -7,11 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import net.openobject.ms.auth.UserDetailsImpl;
 import net.openobject.ms.user.dto.User;
 import net.openobject.ms.user.repository.UserRepository;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -30,6 +29,11 @@ public class CredentialUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Not found user, " + userId);
 		}
 		log.info("~~ user = {}", user.toString());
-		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList("ROLE_USER"));
+		
+		String[] roles = user.getRoleList().stream()
+							.map(e -> e.getRoleName())
+							.toArray(String[]::new);
+		
+		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList(roles));
 	}
 }

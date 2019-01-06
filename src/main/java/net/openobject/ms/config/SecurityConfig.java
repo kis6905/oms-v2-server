@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(TOKEN_ENTRY_POINT).permitAll()
 				.antMatchers(LOGIN_ENTRY_POINT).permitAll()
 				.antMatchers(ERROR_ENTRY_POINT).permitAll()
-				.antMatchers(ROOT_ENTRY_POINT).hasAnyRole("ROLE_USER", "ROLE_ADMIN")
+				.antMatchers(ROOT_ENTRY_POINT).hasAnyRole("USER", "ADMIN")
 				.anyRequest()
 				.authenticated();
     }

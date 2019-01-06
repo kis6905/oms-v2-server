@@ -21,9 +21,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new BadCredentialsException("Not used Token");
 		}
 		
-		String id = decodedJWT.getClaim("id").asString();
-		String role = decodedJWT.getClaim("role").asString();
+		String userId = decodedJWT.getClaim("userId").asString();
+		String roles = decodedJWT.getClaim("roles").asString();
 		
-		return new UserDetailsImpl(id, AuthorityUtils.createAuthorityList(role));
+		return new UserDetailsImpl(userId, AuthorityUtils.createAuthorityList(roles.split(",")));
 	}
 }

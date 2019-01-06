@@ -23,11 +23,11 @@
     </rollingPolicy>
   </appender>
   
-  <logger name="com.leaf.mn" level="degug" additivity="false">
+  <logger name="com.leaf.mn" level="debug" additivity="false">
     <appender-ref ref="console" />
     <!-- <appender-ref ref="file" /> -->
   </logger>
-  <root level="info">
+  <root level="debug">
     <appender-ref ref="console" />
     <!-- <appender-ref ref="file" /> -->
   </root>

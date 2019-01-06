@@ -1,6 +1,7 @@
 package net.openobject.ms.common.utils;
 
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,10 +23,14 @@ public class JwtUtil {
 	
 	private static String createToken(UserDetails userDetails, Date date) {
 		try {
+			String roles = userDetails.getAuthorities().stream()
+				.map(e -> e.toString())
+				.collect(Collectors.joining(","));
+			
 			return JWT.create()
 					.withIssuer(JwtInfo.ISSUER)
 					.withClaim("userId", userDetails.getUsername())
-					.withClaim("role", userDetails.getAuthorities().toArray()[0].toString())
+					.withClaim("roles", roles)
 					.withExpiresAt(date)
 					.sign(JwtInfo.getAlgorithm());
 		} catch (JWTCreationException createEx) {
