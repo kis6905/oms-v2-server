@@ -18,7 +18,7 @@ public class MainController {
 	@ApiOperation(value = "메뉴 목록")
 	@GetMapping(value = "/menu/list")
 	public User getMenuList() {
-		
+		// 테스트 주석
 		return null;
 	}
 	
