@@ -29,7 +29,7 @@ public class Menu {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long seq;
 
 	@Column
 	private String title;
@@ -42,8 +42,8 @@ public class Menu {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "oms_menu_role",
-    		   joinColumns = @JoinColumn(name = "menu_id"),
-    		   inverseJoinColumns = @JoinColumn(name = "role_id"))
+    		   joinColumns = @JoinColumn(name = "menu_seq"),
+    		   inverseJoinColumns = @JoinColumn(name = "role_seq"))
 	private List<Role> roleList;
 	
 }

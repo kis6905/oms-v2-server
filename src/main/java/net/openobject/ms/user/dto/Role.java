@@ -22,7 +22,7 @@ public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long seq;
 	
 	@Column
 	private String roleName;

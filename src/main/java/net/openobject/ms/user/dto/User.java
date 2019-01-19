@@ -40,7 +40,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long seq;
 
 	@Column
 	private String userId;
@@ -56,8 +56,8 @@ public class User {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "oms_user_role",
-    		   joinColumns = @JoinColumn(name = "id_user"),
-    		   inverseJoinColumns = @JoinColumn(name = "id_role"))
+    		   joinColumns = @JoinColumn(name = "user_seq"),
+    		   inverseJoinColumns = @JoinColumn(name = "role_seq"))
 	private List<Role> roleList;
 	
 	@Column
