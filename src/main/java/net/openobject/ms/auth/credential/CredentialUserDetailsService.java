@@ -31,7 +31,7 @@ public class CredentialUserDetailsService implements UserDetailsService {
 		log.info("~~ user = {}", user.toString());
 		
 		String[] roles = user.getRoleList().stream()
-							.map(e -> e.getRoleName())
+							.map(e -> e.getRoleId())
 							.toArray(String[]::new);
 		
 		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList(roles));

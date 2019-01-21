@@ -26,7 +26,7 @@ public class UserController {
 	@ApiOperation(value = "사용자 정보")
 	@GetMapping(value = "/user/{userId}")
 	public User getUser(@ApiParam(value = "사용자 ID", required = true) @PathVariable(name = "userId") String userId) {
-		log.info("-> userId: {}", userId);
+		log.info("");
 		return userService.getUser(userId);
 	}
 	

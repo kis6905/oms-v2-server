@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <property name="LOG_FILE" value="/data/logs/oms/app.log" />
-  <property name="LOG_LEVEL" value="debug" />
+  <property name="LOG_FILE_PATH" value="/data/logs/oms/" />
+  <property name="LOG_FILE_NAME" value="app" />
+  <property name="CHAR_SET" value="UTF-8" />
   
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <charset>UTF-8</charset>
+      <charset>${CHAR_SET}</charset>
       <Pattern>%-5level [%d{yyyy-MM-dd HH:mm:ss.SSS}] %c{1} %M\(\):%L - %m%n</Pattern>
     </encoder>
   </appender>
   
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_FILE}</file>
+    <file>${LOG_FILE_PATH}${LOG_FILE_NAME}.log</file>
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <charset>${CHAR_SET}</charset>
       <Pattern>%-5level [%d{yyyy-MM-dd HH:mm:ss.SSS}] %c{1} %M\(\):%L - %m%n</Pattern>
     </encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}/aidemo_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+      <fileNamePattern>${LOG_FILE_PATH}${LOG_FILE_NAME}_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>10MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
   </appender>
   
-  <logger name="com.leaf.mn" level="debug" additivity="false">
+  <logger name="net.openobject.ms" level="debug" additivity="false">
     <appender-ref ref="console" />
     <!-- <appender-ref ref="file" /> -->
   </logger>
-  <root level="debug">
+  <root level="info">
     <appender-ref ref="console" />
     <!-- <appender-ref ref="file" /> -->
   </root>

@@ -2,8 +2,6 @@ package net.openobject.ms.user.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -21,10 +19,12 @@ import lombok.NoArgsConstructor;
 public class Role {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long seq;
+	private String roleId;
 	
 	@Column
-	private String roleName;
+	private String registeredDate;
+	
+	@Column
+	private String modifiedDate;
 	
 }

@@ -26,6 +26,10 @@ public class CommonConfig {
 		jwtEnable = param;
 	}
 	
+	public static boolean isLocal() {
+		return  (mode != null && mode.equals("L"));
+	}
+	
 	public static boolean isDev() {
 		return  (mode != null && mode.equals("D"));
 	}

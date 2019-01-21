@@ -29,8 +29,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
 		String token = authentication.getCredentials().toString();
 		
-		log.debug("isDev      : {}", CommonConfig.isDev());
-		log.debug("isEnableJwt: {}", CommonConfig.isEnableJwt());
+		log.info("isDev      : {}", CommonConfig.isDev());
+		log.info("isEnableJwt: {}", CommonConfig.isEnableJwt());
 		
 		if (CommonConfig.isDev() && !CommonConfig.isEnableJwt()) {
 			// Skip JWT authentication

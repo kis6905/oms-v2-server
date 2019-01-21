@@ -8,7 +8,7 @@ public class JwtInfo {
 
 	public static final String HEADER_NAME = "jwt-header";
 	public static final String ISSUER = "1leaf";
-	public static final String TOKEN_SECRET_KEY = "mynews321rltnf321";
+	public static final String TOKEN_SECRET_KEY = "oms321rltnf321";
 	public static final long EXPIRES_LIMIT = 3L;
 
 	public static Algorithm getAlgorithm() {

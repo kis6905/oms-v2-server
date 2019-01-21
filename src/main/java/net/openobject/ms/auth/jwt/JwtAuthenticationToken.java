@@ -10,20 +10,13 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
-	// ~ Instance fields
-	// ================================================================================================
-
 	private final Object principal;
 	private Object credentials;
-
-	// ~ Constructors
-	// ===================================================================================================
 
 	/**
 	 * This constructor can be safely used by any code that wishes to create a
 	 * <code>UsernamePasswordAuthenticationToken</code>, as the {@link #isAuthenticated()}
 	 * will return <code>false</code>.
-	 *
 	 */
 	public JwtAuthenticationToken(Object credentials) {
 		super(null);
@@ -48,9 +41,6 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 		this.credentials = credentials;
 		super.setAuthenticated(true); // must use super, as we override
 	}
-
-	// ~ Methods
-	// ========================================================================================================
 
 	public Object getCredentials() {
 		return this.credentials;
