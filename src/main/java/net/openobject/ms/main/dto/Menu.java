@@ -34,6 +34,9 @@ public class Menu {
 	private String description;
 	
 	@Column
+	private String viewPath;
+	
+	@Column
 	private String iconUrl;
 	
 }
