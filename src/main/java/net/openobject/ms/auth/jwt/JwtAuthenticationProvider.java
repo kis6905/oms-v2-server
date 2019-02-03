@@ -9,10 +9,9 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import net.openobject.ms.common.utils.JwtUtil;
 import net.openobject.ms.config.CommonConfig;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -26,7 +25,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 		if (authentication.getCredentials() == null) {
 			throw new BadCredentialsException("Bad token(credential is null)");
 		}
-
+		
 		String token = authentication.getCredentials().toString();
 		
 		log.info("isDev      : {}", CommonConfig.isDev());
@@ -38,7 +37,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 		} else {
 			if (JwtUtil.verify(token)) {
 				UserDetails userDetails = userDetailsService.loadUserByUsername(token);
-				return new JwtAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+				return new JwtAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 			} else {
 				throw new BadCredentialsException("Bad token(invalid token)");
 			}

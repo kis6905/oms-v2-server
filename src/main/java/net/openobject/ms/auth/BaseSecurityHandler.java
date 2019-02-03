@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class BaseSecurityHandler implements AuthenticationSuccessHandler, Authen
 	public void onAuthenticationSuccess(HttpServletRequest request,
 	                                    HttpServletResponse response,
 	                                    Authentication authentication) {
-		UserDetails userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		response.setHeader(JwtInfo.HEADER_NAME, JwtUtil.createToken(userDetails));
 	}

@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,6 +19,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import net.openobject.ms.project.dto.UserProject;
 
 /**
  * <pre>
@@ -33,6 +35,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = { "roleList", "userProjectList" })
 @Entity(name = "User")
 @Table(name = "oms_user")
 @JsonIgnoreProperties(value = { "realPassword" })
@@ -54,11 +57,15 @@ public class User {
 	@Column
 	private String rank;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
     @JoinTable(name = "oms_user_role",
     		   joinColumns = @JoinColumn(name = "user_seq"),
     		   inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roleList;
+	
+	@OneToMany
+	@JoinColumn(name = "user_seq")
+	private List<UserProject> userProjectList;
 	
 	@Column
 	private String registeredDate;

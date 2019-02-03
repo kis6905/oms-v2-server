@@ -22,8 +22,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		
 		String userId = decodedJWT.getClaim("userId").asString();
+		long userSeq = decodedJWT.getClaim("userSeq").asLong();
 		String roles = decodedJWT.getClaim("roles").asString();
 		
-		return new UserDetailsImpl(userId, AuthorityUtils.createAuthorityList(roles.split(",")));
+		return new UserDetailsImpl(userId, userSeq, AuthorityUtils.createAuthorityList(roles.split(",")));
 	}
 }

@@ -1,5 +1,7 @@
 package net.openobject.ms.auth.credential;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,7 @@ public class CredentialUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String userId) {
 		log.info("~~ loadUserByUsername() [userId = {}]", userId);
 		User user = userRepository.findByUserId(userId);
@@ -28,12 +31,14 @@ public class CredentialUserDetailsService implements UserDetailsService {
 			log.info("~~ user is null");
 			throw new UsernameNotFoundException("Not found user, " + userId);
 		}
-		log.info("~~ user = {}", user.toString());
+		log.info("~~ userSeq : {}", user.getSeq());
+		log.info("~~ userId  : {}", user.getUserId());
+		log.info("~~ userName: {}", user.getName());
 		
 		String[] roles = user.getRoleList().stream()
 							.map(e -> e.getRoleId())
 							.toArray(String[]::new);
 		
-		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList(roles));
+		return new UserDetailsImpl(user, user.getSeq(), AuthorityUtils.createAuthorityList(roles));
 	}
 }
