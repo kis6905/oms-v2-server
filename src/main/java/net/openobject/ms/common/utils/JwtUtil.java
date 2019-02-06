@@ -3,8 +3,6 @@ package net.openobject.ms.common.utils;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -12,16 +10,17 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import lombok.extern.slf4j.Slf4j;
+import net.openobject.ms.auth.UserDetailsImpl;
 import net.openobject.ms.auth.jwt.JwtInfo;
 
 @Slf4j
 public class JwtUtil {
 
-	public static String createToken(UserDetails userDetails) {
+	public static String createToken(UserDetailsImpl userDetails) {
 		return createToken(userDetails, DateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMIT));
 	}
 	
-	private static String createToken(UserDetails userDetails, Date date) {
+	private static String createToken(UserDetailsImpl userDetails, Date date) {
 		try {
 			String roles = userDetails.getAuthorities().stream()
 				.map(e -> e.toString())
@@ -29,6 +28,7 @@ public class JwtUtil {
 			
 			return JWT.create()
 					.withIssuer(JwtInfo.ISSUER)
+					.withClaim("userSeq", userDetails.getUserSeq())
 					.withClaim("userId", userDetails.getUsername())
 					.withClaim("roles", roles)
 					.withExpiresAt(date)
@@ -49,7 +49,7 @@ public class JwtUtil {
 		}
 	}
 
-	public static String refreshToken(UserDetails userDetails) {
+	public static String refreshToken(UserDetailsImpl userDetails) {
 		return createToken(userDetails, DateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMIT));
 	}
 	
