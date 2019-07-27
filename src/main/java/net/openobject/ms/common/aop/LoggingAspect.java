@@ -30,7 +30,7 @@ public class LoggingAspect {
 		Method method = MethodSignature.class.cast(signature).getMethod();
 		Object[] args = joinPoint.getArgs();
 		
-		log.info("=============================================");
+		log.info("====================================================================");
 		log.info("{}.{}()", signature.getDeclaringTypeName(), method.getName());
 		
 		Parameter[] paramsters = method.getParameters();
@@ -50,7 +50,7 @@ public class LoggingAspect {
 				log.info("param -> {}: {}", parameter.getName(), arg.toString());
 			}
 		}
-		log.info("=============================================");
+		log.info("====================================================================");
 	}
 	
 }
