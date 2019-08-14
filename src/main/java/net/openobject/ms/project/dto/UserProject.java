@@ -75,10 +75,6 @@ public class UserProject {
 	@Transient
 	private String projectRoleName;
 	
-	public void setProjectRoleNameByProjectRoleCode(String projectRoleCode) {
-		projectRoleName = ProjectRole.getNameByCode(projectRoleCode);
-	}
-	
 	@Column
 	private String inputDate;
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,14 +26,24 @@ public class ProjectController {
 	
 	@ApiOperation(value = "내 프로젝트 목록")
 	@GetMapping(value = "/list")
-	public List<UserProject> getCurrentList() throws Exception {
+	public List<UserProject> getProjectList() throws Exception {
 		String userId = SpringSecurityUtil.getUserId();
-		
 		log.debug("userId: {}", userId);
-		
 		List<UserProject> list = projectService.getUserProjectList(userId);
 		log.debug("list: {}", list);
+		
 		return list;
+	}
+	
+	@ApiOperation(value = "특정 프로젝트의 작성한 주간보고 목록")
+	@GetMapping(value = "/{projectSeq}/weeklyReport/list")
+	public String getProjectWeeks(@PathVariable String projectSeq) throws Exception {
+		String userId = SpringSecurityUtil.getUserId();
+		log.debug("userId: {}", userId);
+		
+		// TODO: 프로젝트의 주간보고 목록
+		
+		return "";
 	}
 	
 }
