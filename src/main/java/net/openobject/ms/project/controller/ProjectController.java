@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.openobject.ms.common.utils.SpringSecurityUtil;
 import net.openobject.ms.project.dto.UserProject;
+import net.openobject.ms.project.dto.WeeklyReport;
 import net.openobject.ms.project.service.ProjectService;
 
 @RestController
@@ -31,19 +32,17 @@ public class ProjectController {
 		log.debug("userId: {}", userId);
 		List<UserProject> list = projectService.getUserProjectList(userId);
 		log.debug("list: {}", list);
-		
 		return list;
 	}
 	
 	@ApiOperation(value = "특정 프로젝트의 작성한 주간보고 목록")
 	@GetMapping(value = "/{projectSeq}/weeklyReport/list")
-	public String getProjectWeeks(@PathVariable String projectSeq) throws Exception {
-		String userId = SpringSecurityUtil.getUserId();
-		log.debug("userId: {}", userId);
-		
-		// TODO: 프로젝트의 주간보고 목록
-		
-		return "";
+	public List<WeeklyReport> getProjectWeeks(@PathVariable Long projectSeq) throws Exception {
+		Long userSeq = SpringSecurityUtil.getUserSeq();
+		log.debug("userSeq: {}", userSeq);
+		List<WeeklyReport> list = projectService.getWeeklyReportList(userSeq, projectSeq);
+		log.debug("list: {}", list);
+		return list;
 	}
 	
 }
