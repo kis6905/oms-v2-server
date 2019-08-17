@@ -39,6 +39,6 @@ public class CredentialUserDetailsService implements UserDetailsService {
 							.map(e -> e.getRoleId())
 							.toArray(String[]::new);
 		
-		return new UserDetailsImpl(user, user.getSeq(), AuthorityUtils.createAuthorityList(roles));
+		return new UserDetailsImpl(user, user.getSeq(), user.getName(), user.getRank(), AuthorityUtils.createAuthorityList(roles));
 	}
 }
