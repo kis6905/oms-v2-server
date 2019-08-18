@@ -30,6 +30,8 @@ public class JwtUtil {
 					.withIssuer(JwtInfo.ISSUER)
 					.withClaim("userSeq", userDetails.getUserSeq())
 					.withClaim("userId", userDetails.getUsername())
+					.withClaim("name", userDetails.getName())
+					.withClaim("rank", userDetails.getRank())
 					.withClaim("roles", roles)
 					.withExpiresAt(date)
 					.sign(JwtInfo.getAlgorithm());
