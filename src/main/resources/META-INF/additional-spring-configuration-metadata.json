@@ -3,7 +3,7 @@
 		{
 			"name": "jwt.enable",
 			"type": "java.lang.String",
-			"description": "enable jwt authrization.",
+			"description": "Enable jwt authrization.",
       		"defaultValue": "true"
 		}
 	]

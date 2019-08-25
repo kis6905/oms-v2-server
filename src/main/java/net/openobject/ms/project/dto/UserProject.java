@@ -1,5 +1,7 @@
 package net.openobject.ms.project.dto;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,7 +65,7 @@ public class UserProject {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long seq;
+	private Long seq;
 	
 	@ManyToOne
 	@JoinColumn(name = "project_seq")
@@ -75,20 +80,18 @@ public class UserProject {
 	@Transient
 	private String projectRoleName;
 	
-	public void setProjectRoleNameByProjectRoleCode(String projectRoleCode) {
-		projectRoleName = ProjectRole.getNameByCode(projectRoleCode);
-	}
-	
 	@Column
 	private String inputDate;
 	
 	@Column
 	private String withdrawalDate;
 	
-	@Column
-	private String registeredDate;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime registeredDate;
 	
-	@Column
-	private String modifiedDate;
+	@LastModifiedDate
+	@Column(updatable = true)
+	private LocalDateTime modifiedDate;
 	
 }

@@ -11,6 +11,9 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.lang.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,41 +24,47 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "Project")
-@Table(name = "oms_project")
-public class Project {
+@Entity(name = "WeeklyReport")
+@Table(name = "oms_weekly_report")
+public class WeeklyReport {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Nullable
 	private Long seq;
 	
 	@Column
-	private String projectName;
+	private String weeklyDate;
 	
 	@Column
-	private String projectDescription;
+	@JsonIgnore
+	@Nullable
+	private Long userSeq;
 	
 	@Column
-	private String projectStartDate;
+	@Nullable
+	private Long projectSeq;
 	
 	@Column
-	private String projectEndDate;
+	@Nullable
+	private String thisWeekTask;
 	
 	@Column
-	private String projectStatus;
+	@Nullable
+	private String nextWeekTask;
 	
 	@Column
-	private String projectClient;
-	
-	@Column
-	private String projectAmount;
+	@Nullable
+	private String issueContents;
 	
 	@CreatedDate
 	@Column(updatable = false)
+	@Nullable
 	private LocalDateTime registeredDate;
 	
 	@LastModifiedDate
 	@Column(updatable = true)
+	@Nullable
 	private LocalDateTime modifiedDate;
 	
 }

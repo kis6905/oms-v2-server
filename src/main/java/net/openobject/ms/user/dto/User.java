@@ -1,5 +1,6 @@
 package net.openobject.ms.user.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,7 +47,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long seq;
+	private Long seq;
 
 	@Column
 	private String userId;
@@ -67,11 +71,13 @@ public class User {
 	@JoinColumn(name = "user_seq")
 	private List<UserProject> userProjectList;
 	
-	@Column
-	private String registeredDate;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime registeredDate;
 	
-	@Column
-	private String modifiedDate;
+	@LastModifiedDate
+	@Column(updatable = true)
+	private LocalDateTime modifiedDate;
 	
 	public String getPassword() {
 		return "";

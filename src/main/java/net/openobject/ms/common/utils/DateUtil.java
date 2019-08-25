@@ -1,6 +1,7 @@
 package net.openobject.ms.common.utils;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 
@@ -12,5 +13,9 @@ public class DateUtil {
 
 	public static Date nowAfterDaysToDate(Long days) {
 		return Date.from(LocalDateTime.now().plusDays(days).toInstant(ZoneOffset.ofHours(9)));
+	}
+	
+	public static LocalDateTime nowLocalDateTime() {
+		return LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 	}
 }
