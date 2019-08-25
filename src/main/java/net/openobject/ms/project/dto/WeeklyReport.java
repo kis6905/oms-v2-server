@@ -1,11 +1,17 @@
 package net.openobject.ms.project.dto;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.lang.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,32 +30,41 @@ public class WeeklyReport {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long seq;
+	@Nullable
+	private Long seq;
 	
 	@Column
 	private String weeklyDate;
 	
 	@Column
 	@JsonIgnore
+	@Nullable
 	private Long userSeq;
 	
 	@Column
-	@JsonIgnore
+	@Nullable
 	private Long projectSeq;
 	
 	@Column
+	@Nullable
 	private String thisWeekTask;
 	
 	@Column
+	@Nullable
 	private String nextWeekTask;
 	
 	@Column
+	@Nullable
 	private String issueContents;
 	
-	@Column
-	private String registeredDate;
+	@CreatedDate
+	@Column(updatable = false)
+	@Nullable
+	private LocalDateTime registeredDate;
 	
-	@Column
-	private String modifiedDate;
+	@LastModifiedDate
+	@Column(updatable = true)
+	@Nullable
+	private LocalDateTime modifiedDate;
 	
 }

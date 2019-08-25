@@ -1,9 +1,14 @@
 package net.openobject.ms.user.dto;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,10 +26,11 @@ public class Role {
 	@Id
 	private String roleId;
 	
-	@Column
-	private String registeredDate;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime registeredDate;
 	
-	@Column
-	private String modifiedDate;
-	
+	@LastModifiedDate
+	@Column(updatable = true)
+	private LocalDateTime modifiedDate;
 }

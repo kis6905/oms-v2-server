@@ -47,7 +47,7 @@ public class LoggingAspect {
 				
 				Parameter parameter = paramsters[argIndex];
 				Object arg = args[argIndex];
-				log.info("param -> {}: {}", parameter.getName(), arg.toString());
+				log.info("param -> {}: {}", parameter.getName(), arg == null ? null : arg.toString());
 			}
 		}
 		log.info("====================================================================");

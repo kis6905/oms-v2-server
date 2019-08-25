@@ -1,11 +1,16 @@
 package net.openobject.ms.project.dto;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +27,7 @@ public class Project {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long seq;
+	private Long seq;
 	
 	@Column
 	private String projectName;
@@ -45,10 +50,12 @@ public class Project {
 	@Column
 	private String projectAmount;
 	
-	@Column
-	private String registeredDate;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime registeredDate;
 	
-	@Column
-	private String modifiedDate;
+	@LastModifiedDate
+	@Column(updatable = true)
+	private LocalDateTime modifiedDate;
 	
 }
