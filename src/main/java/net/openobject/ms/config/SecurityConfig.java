@@ -51,10 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtAuthenticationProvider jwtProvider;
 	
 	private static final String LOGIN_ENTRY_POINT = "/login";
-	private static final String ADMIN_ENTRY_POINT = "/admin";
+	private static final String ADMIN_ENTRY_POINT = "/admin/**";
 	private static final String TOKEN_ENTRY_POINT = "/token";
 	private static final String ERROR_ENTRY_POINT = "/error";
-	private static final String ROOT_ENTRY_POINT = "/**";
+	private static final String ROOT_ENTRY_POINT = "/";
 	private static final String[] SWAGGER_ENTRY_POINTS = { "/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**" };
 	private static final String[] H2_ENTRY_POINTS = { "/h2" };
 	
