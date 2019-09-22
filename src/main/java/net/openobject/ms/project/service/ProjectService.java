@@ -1,7 +1,6 @@
 package net.openobject.ms.project.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -27,12 +26,11 @@ public class ProjectService {
 	@Transactional
 	public List<UserProject> getUserProjectList(String userId) {
 		User user = userService.getUser(userId);
-		return user.getUserProjectList().stream()
-				.map((e) -> {
-					e.setProjectRoleName(ProjectRole.getNameByCode(e.getProjectRole()));
-					return e;
-				})
-				.collect(Collectors.toList());
+		List<UserProject> userProjectList = user.getUserProjectList();
+		for (UserProject userProject : userProjectList) {
+			userProject.setProjectRoleName(ProjectRole.getNameByCode(userProject.getProjectRole()));
+		}
+		return userProjectList;
 	}
 	
 	public List<WeeklyReport> getWeeklyReportList(Long userSeq, Long projectSeq) {
